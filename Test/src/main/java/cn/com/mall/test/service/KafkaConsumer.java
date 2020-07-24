@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class KafkaConsumer {
 
-    private static byte[] bytes = new byte[Integer.MAX_VALUE];
     public KafkaConsumer(){
         log.debug("");
     }

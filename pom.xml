@@ -7,6 +7,8 @@
     <modules>
         <module>mall-common</module>
         <module>Test</module>
+        <module>mall-gateway</module>
+        <module>mall-user</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -43,6 +45,7 @@
         <zipkin.version>2.11.4</zipkin.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <httpclient.version>4.5.5</httpclient.version>
+        <hutools.version>5.3.10</hutools.version>
 
     </properties>
     <dependencyManagement>
@@ -78,8 +81,11 @@
                 <artifactId>mybatisplus-spring-boot-starter</artifactId>
                 <version>${mybatisplus-spring-boot-starter.version}</version>
             </dependency>
-            
-
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutools.version}</version>
+            </dependency>
 
             <!--druid-spring-boot -->
             <dependency>
@@ -94,6 +100,12 @@
                 <version>${spring-aop.version}</version>
             </dependency>
 
+            <!-- 自动生成工具 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
             <!--Ali Nacos-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
