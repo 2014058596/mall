@@ -1,7 +1,6 @@
-package cn.com.mall.common.bean;
+package cn.com.mall.base.bean;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,19 +31,14 @@ public class StandardResult<T> {
     @ApiModelProperty(value = "响应状态码  200 响应成功   500响应失败")
     private int code;
 
-    /**
-     * 错误栈信息
-     */
-    @JsonIgnore
-    private String errorStackInfo;
 
-    public StandardResult(boolean state, String msg, T data, int code, String errorStackInfo) {
+
+    public StandardResult(boolean state, String msg, T data, int code) {
         super();
         this.state = state;
         this.msg = msg;
         this.data = data;
         this.code = code;
-        this.errorStackInfo = errorStackInfo;
     }
 
     /**
@@ -72,7 +66,7 @@ public class StandardResult<T> {
      */
     public static <T> StandardResult<T> ok(String msg, T data) {
 
-        return new StandardResult<>(HttpStatus.OK.success(), msg, data, HttpStatus.OK.code(),null);
+        return new StandardResult<>(HttpStatus.OK.success(), msg, data, HttpStatus.OK.code());
     }
 
 
@@ -104,35 +98,20 @@ public class StandardResult<T> {
         return StandardResult.ok(null);
     }
 
+
+    public static StandardResult fail(HttpStatus httpStatus){
+
+        return new StandardResult(httpStatus.success(), httpStatus.reasonPhraseCN(), null, httpStatus.code());
+    }
+
     /**
      * 失败
      * @param msg
      * @return
      */
     public static StandardResult fail(String msg) {
-
-        if (msg == null) {
-            msg = "";
-        }
-
-        return new StandardResult(false, msg, null, HttpStatus.INTERNAL_SERVER_ERROR.code(), msg);
-    }
-
-    public static StandardResult fail(HttpStatus httpStatus){
-
-        return new StandardResult(httpStatus.success(), httpStatus.reasonPhraseCN(), null, httpStatus.code(), null);
-    }
-
-    /**
-     * 失败
-     * @param msg
-     * @param ex
-     * @return
-     */
-    public static StandardResult fail(String msg, Exception ex) {
-
-        return new StandardResult(false, msg, null, HttpStatus.INTERNAL_SERVER_ERROR.code(), printStackTraceToString(ex));
-    }
+        return new StandardResult(false, msg, null, HttpStatus.INTERNAL_SERVER_ERROR.code());
+}
 
     /**
      * 失败
@@ -140,14 +119,7 @@ public class StandardResult<T> {
      * @return
      */
     public static StandardResult fail(Exception ex) {
-        if (ex instanceof CommonException) {
-            return fail(ex.getMessage(), ex);
-        } else if (ex.getCause() instanceof CommonException) {
-            return fail(ex.getCause().getMessage(), ex);
-        } else if (ex.getCause() != null && ex.getCause().getCause() instanceof CommonException){
-            return fail(ex.getCause().getCause().getMessage(), ex);
-        }
-        return fail(HttpStatus.INTERNAL_SERVER_ERROR.reasonPhraseCN(), ex);
+        return fail(HttpStatus.INTERNAL_SERVER_ERROR.reasonPhraseCN());
     }
 
 

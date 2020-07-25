@@ -9,6 +9,7 @@
         <module>Test</module>
         <module>mall-gateway</module>
         <module>mall-user</module>
+        <module>mall-base</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -182,6 +183,22 @@
                 <groupId>com.bbossgroups.plugins</groupId>
                 <artifactId>bboss-elasticsearch-rest-jdbc</artifactId>
                 <version>6.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.com.mall</groupId>
+                <artifactId>mall-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mall</groupId>
+                <artifactId>mall-base</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mall</groupId>
+                <artifactId>mall-user-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
 
         </dependencies>

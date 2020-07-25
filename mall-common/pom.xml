@@ -137,6 +137,10 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.mall</groupId>
+            <artifactId>mall-base</artifactId>
+        </dependency>
 
     </dependencies>
 

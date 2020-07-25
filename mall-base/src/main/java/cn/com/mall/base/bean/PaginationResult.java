@@ -1,4 +1,4 @@
-package cn.com.mall.common.bean;
+package cn.com.mall.base.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

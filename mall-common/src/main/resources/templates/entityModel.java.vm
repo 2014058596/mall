@@ -1,13 +1,16 @@
-package ${cfg.entityModelPackage};
-import com.baomidou.mybatisplus.annotations.TableName;
+package ${package.Entity};
+
+    #foreach($pkg in ${table.importPackages})
+import ${pkg};
+    #end
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import ${cfg.entityPackage}.${entity};
+
 /**
  * <p>
- * ${table.comment} 扩展对象 注：扩展字段需要添加 @TableField(exist = false) 标签表明为非数据库字段
- *
+ * ${table.comment}实体类  与数据库一一对应,请勿轻易修改
  * </p>
  *
  * @author ${author}
@@ -16,9 +19,59 @@ import ${cfg.entityPackage}.${entity};
  */
 @Data
 #if(${table.convert})
-@TableName("${table.name}")
-@ApiModel(value = "${table.comment}")
+@ApiModel(value = "${table.name}", description = "${table.comment}")
 #end
-public class ${entity}Model extends ${entity} {
+#if(${superEntityClass})
+public class ${entity}Model extends ${superEntityClass}#if(${activeRecord})<${entity}Model>#end {
+#elseif(${activeRecord})
+public class ${entity}Model extends Model<${entity}Model> {
+#else
+public class ${entity}Model implements Serializable {
+#end
+
+private static final long serialVersionUID = 1L;
+
+#if(${entityColumnConstant})
+    #foreach($field in ${table.fields})
+    public static final String ${field.name.toUpperCase()} = "${field.name}";
+
+    #end
+#end
+
+#foreach($field in ${table.fields})
+    #if(${field.keyFlag})
+        #set($keyPropertyName=${field.propertyName})
+    #end
+    #if("$!field.comment" != "")
+    /**
+     * ${field.comment}
+     */
+    @ApiModelProperty(value = "${field.comment}")
+    #end
+    #if(${field.keyFlag})
+        #if(${field.keyIdentityFlag})
+        @TableId(value="${field.name}", type= IdType.AUTO)
+        #elseif(${field.convert})
+        @TableId("${field.name}")
+        #end
+    #elseif(${field.convert})
+    @TableField("${field.name}")
+    #end
+    private ${field.propertyType} ${field.propertyName};
+
+#end
+
+
+#if(${activeRecord})
+    @Override
+    protected Serializable pkVal() {
+    #if(${keyPropertyName})
+            return this.${keyPropertyName};
+    #else
+            return this.id;
+    #end
+    }
+
+#end
 
 }

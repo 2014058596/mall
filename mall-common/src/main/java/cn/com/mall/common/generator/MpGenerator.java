@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.velocity.context.Context;
 
 import java.net.URLDecoder;
 import java.util.*;
