@@ -20,6 +20,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "role_permission", description = "")
+@TableName("role_permission")
 public class RolePermissionModel extends Model<RolePermissionModel> {
 
 private static final long serialVersionUID = 1L;

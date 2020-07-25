@@ -20,6 +20,7 @@ import lombok.Data;
 @Data
 #if(${table.convert})
 @ApiModel(value = "${table.name}", description = "${table.comment}")
+@TableName("${table.name}")
 #end
 #if(${superEntityClass})
 public class ${entity}Model extends ${superEntityClass}#if(${activeRecord})<${entity}Model>#end {

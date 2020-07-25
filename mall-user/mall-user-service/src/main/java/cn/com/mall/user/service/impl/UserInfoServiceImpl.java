@@ -1,6 +1,7 @@
 package cn.com.mall.user.service.impl;
 
 
+import cn.com.mall.user.api.dto.UserInfoDto;
 import cn.com.mall.user.api.model.UserInfoModel;
 import cn.com.mall.user.mapper.UserInfoMapper;
 import cn.com.mall.user.service.IUserInfoService;
@@ -17,5 +18,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfoModel> implements IUserInfoService {
-	
+
+    /**
+     * 根据用户名称获取用户
+     * 包含角色权限
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public UserInfoDto findUserInfoByUserName(String userName) {
+        return null;
+    }
 }

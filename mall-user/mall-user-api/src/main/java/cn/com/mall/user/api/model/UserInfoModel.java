@@ -23,6 +23,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "user_info", description = "")
+@TableName("user_info")
 public class UserInfoModel extends Model<UserInfoModel> {
 
 private static final long serialVersionUID = 1L;

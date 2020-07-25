@@ -28,7 +28,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberName) throws UsernameNotFoundException {
-        Member member = memberDao.findByMemberName(memberName);
+        /*Member member = memberDao.findByMemberName(memberName);
         if (member == null) {
             throw new UsernameNotFoundException(memberName);
         }
@@ -53,7 +53,8 @@ public class MyUserDetailService implements UserDetailsService {
         }
         User user = new User(member.getMemberName(), member.getPassword(),
                 enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
-        return user;
+        return user;*/
+        return null;
     }
 
 }
