@@ -108,7 +108,7 @@ public class ${table.controllerName} {
     @ApiOperation(value="通过id获取详情  ${author}", notes="通过id获取详情  ${author}", response = ${entity}Model.class)
     @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @GetMapping("/${table.entityPath}/{id}")
-    public StandardResult selectById(@PathVariable @NotEmpty String id) {
+    public StandardResult selectById(@PathVariable String id) {
         return StandardResult.ok(${table.entityPath}Service.selectById(id));
     }
 

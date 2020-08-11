@@ -107,7 +107,7 @@ public class PermissionInfoController {
     @ApiOperation(value="通过id获取详情  55555", notes="通过id获取详情  55555", response = PermissionInfoModel.class)
     @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @GetMapping("/permissionInfo/{id}")
-    public StandardResult selectById(@PathVariable @NotEmpty String id) {
+    public StandardResult selectById(@PathVariable String id) {
         return StandardResult.ok(permissionInfoService.selectById(id));
     }
 
