@@ -3,9 +3,11 @@ package cn.com.mall.common.handler;
 import cn.com.mall.base.bean.CommonException;
 import cn.com.mall.base.bean.ExceptionDto;
 import cn.com.mall.base.bean.HttpStatus;
+import cn.com.mall.base.bean.StandardResult;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,24 +29,10 @@ public class MallExceptionHandler {
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public ExceptionDto handlerException(Exception e, HttpServletResponse response) {
-        log.error("全局异常拦截器：{0}", e);
-        //获取根异常
-        Throwable cause = e.getCause();
+    public StandardResult<CommonException> handlerException(Exception e, HttpServletResponse response) {
+        log.error("全局异常拦截器：{}", e);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.code());
-        ExceptionDto exceptionDTO = new ExceptionDto();
-        exceptionDTO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.code());
-
-        if (cause != null) {
-            exceptionDTO.setMessage(cause.getMessage());
-            exceptionDTO.setStackTrace(cause.getStackTrace());
-        } else {
-            exceptionDTO.setMessage(e.getMessage());
-            exceptionDTO.setStackTrace(e.getStackTrace());
-        }
-
-        exceptionDTO.setExceptionClassName(Exception.class.getName());
-        return exceptionDTO;
+        return StandardResult.fail(e);
     }
 
     /**
@@ -54,14 +42,22 @@ public class MallExceptionHandler {
      * @return
      */
     @ExceptionHandler(CommonException.class)
-    public ExceptionDto handlerCommonException(CommonException e, HttpServletResponse response) {
-        log.error("全局异常拦截器：{0}", e);
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.code());
-        ExceptionDto exceptionDTO = new ExceptionDto();
-        exceptionDTO.setCode(e.getCode());
-        exceptionDTO.setMessage(e.getMessage());
-        exceptionDTO.setStackTrace(e.getStackTrace());
-        exceptionDTO.setExceptionClassName(CommonException.class.getName());
-        return exceptionDTO;
+    public StandardResult<CommonException> handlerCommonException(CommonException e, HttpServletResponse response) {
+        log.error("全局异常拦截器：{}", e);
+        return StandardResult.fail(e);
     }
+
+    /**
+     * 全局CommonException处理
+     * @param e
+     * @param response
+     * @return
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public StandardResult<CommonException> handlerCommonException(NoHandlerFoundException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.NOT_FOUND.code());
+        return StandardResult.fail(HttpStatus.NOT_FOUND);
+    }
+
+
 }

@@ -23,8 +23,6 @@ public class MemberController {
     @Autowired
     private MyUserDetailService userDetailService;
 
-    @Autowired
-    private ConsumerTokenServices consumerTokenServices;
 
    /* @GetMapping("/member")
     public Principal user(Principal member) {
@@ -32,7 +30,7 @@ public class MemberController {
         return member;
     }*/
 
-    @DeleteMapping(value = "/exit")
+   /* @DeleteMapping(value = "/exit")
     public StandardResult<String> revokeToken(String access_token) {
         //注销当前用户
         if (consumerTokenServices.revokeToken(access_token)) {
@@ -40,6 +38,6 @@ public class MemberController {
         } else {
             return StandardResult.fail("注销失败");
         }
-    }
+    }*/
 }
 

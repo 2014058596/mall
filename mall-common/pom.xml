@@ -121,16 +121,33 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--kafka-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!--rabbitmq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+
         <!--Ali Nacos config-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <scope>provided</scope>
+        </dependency>
+
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
 
         <dependency>
@@ -139,7 +156,7 @@
         </dependency>
         <dependency>
             <groupId>cn.com.mall</groupId>
-            <artifactId>mall-base</artifactId>
+            <artifactId>mall-user-api</artifactId>
         </dependency>
 
     </dependencies>

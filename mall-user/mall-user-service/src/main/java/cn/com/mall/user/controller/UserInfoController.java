@@ -1,19 +1,16 @@
 package cn.com.mall.user.controller;
+import cn.com.mall.base.bean.CommonException;
 import cn.com.mall.base.bean.PaginationResult;
 import cn.com.mall.base.bean.StandardResult;
+import cn.com.mall.common.utils.SpringContextHelper;
+import cn.com.mall.user.api.dto.UserInfoDto;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.plugins.Page;
 
 import cn.com.mall.user.service.IUserInfoService;
@@ -23,6 +20,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+
 /**
  *　　
  *   UserInfo 控制器    
@@ -32,6 +33,7 @@ import io.swagger.annotations.ApiOperation;
  */
 
 @RestController
+@RequestMapping("/")
 @Api(tags="UserInfoController 控制器")
 public class UserInfoController {
     private final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
@@ -92,6 +94,34 @@ public class UserInfoController {
     }
 
     /**
+     * 添加
+     * @author : 55555
+     * @since : Create in 2020-07-25
+     */
+    @ApiOperation(value = "添加  55555", notes = "添加UserInfo 55555", response = UserInfoModel.class)
+    @ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String")
+    @PostMapping("/userInfoList")
+    @Transactional(rollbackFor = Exception.class)
+    public StandardResult insert(@RequestBody List<Integer> list) {
+        logger.info(Thread.currentThread().getName());
+        final int poolSize = ForkJoinPool.commonPool().getPoolSize();
+        logger.debug(String.valueOf(poolSize));
+        list.stream().parallel().forEach(i-> {
+            UserInfoModel userInfoModel = new UserInfoModel();
+            userInfoModel.setUserId(i);
+            userInfoModel.setUserName("TEST");
+            logger.info(Thread.currentThread().getName());
+            userInfoService.insert(userInfoModel);
+            if(i==5){
+                throw new CommonException("test");
+            }
+
+        });
+        return StandardResult.ok();
+    }
+
+
+    /**
      * 修改
      * @author : 55555
      * @since : Create in 2020-07-25
@@ -116,7 +146,8 @@ public class UserInfoController {
     	@ApiImplicitParam(paramType="path", name = "id", value = "主键id", dataType = "String", required = true)
     })
     @GetMapping("/userInfo/{id}")
-    public StandardResult selectById(@PathVariable String id) {
+    public StandardResult selectById(@PathVariable String id) throws Exception {
+        final UserInfoDto userInfoByUserName = userInfoService.findUserInfoByUserName(id);
         return StandardResult.ok(userInfoService.selectById(id));
     }
 

@@ -10,6 +10,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.concurrent.ExecutorService;
@@ -30,6 +31,7 @@ import java.util.stream.IntStream;
 @EnableTransactionManagement
 @EnableCircuitBreaker
 @Log4j2
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AdminStartApplication extends SpringBootServletInitializer {
 
 

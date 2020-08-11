@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.mall.user.mapper.UserInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.com.mall.user.api.model.UserInfoModel">
+		<id column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="password" property="password" />
+		<result column="email" property="email" />
+		<result column="sex" property="sex" />
+		<result column="mobile" property="mobile" />
+		<result column="birthday" property="birthday" />
+		<result column="createTime" property="createTime" />
+	</resultMap>
+
+	<resultMap id="UserResultMap" type="cn.com.mall.user.api.dto.UserInfoDto">
+		<id column="userId" property="userId" />
+		<result column="userName" property="userName" />
+		<result column="password" property="password" />
+		<result column="email" property="email" />
+		<result column="sex" property="sex" />
+		<result column="mobile" property="mobile" />
+		<result column="birthday" property="birthday" />
+		<result column="createTime" property="createTime" />
+		<collection property="roleList" javaType="java.util.ArrayList"
+					ofType="cn.com.mall.user.api.model.RoleInfoModel">
+			<id column="roleId" property="roleId" />
+			<result column="roleName" property="roleName" />
+		</collection>
+	</resultMap>
+
+	<select id="findUserInfoByCondition" resultMap="UserResultMap">
+		select
+				u.user_name     userName,
+				u.password,
+				u.email,
+				u.sex,
+				u.mobile,
+				u.birthday,
+				u.createTime,
+				r.role_id       roleId,
+				r.role_name     roleName
+		from user_info u
+			left join user_role ur
+				on u.user_id = ur.user_id
+			left join role_info r
+				on r.role_id = ur.role_id and r.valid = '1'
+			<where>${ew.sqlSegment}</where>
+	</select>
+
+</mapper>

@@ -119,7 +119,16 @@ public class StandardResult<T> {
      * @return
      */
     public static StandardResult fail(Exception ex) {
-        return fail(HttpStatus.INTERNAL_SERVER_ERROR.reasonPhraseCN());
+        return new StandardResult(false, HttpStatus.INTERNAL_SERVER_ERROR.reasonPhraseCN(), ex,HttpStatus.INTERNAL_SERVER_ERROR.code());
+    }
+
+    /**
+     * 失败
+     * @param ex
+     * @return
+     */
+    public static StandardResult fail(CommonException ex) {
+        return new StandardResult(false, ex.getMessage(), null,HttpStatus.INTERNAL_SERVER_ERROR.code());
     }
 
 

@@ -1,3 +1,4 @@
+/*
 package cn.com.mall.user.security;
 
 
@@ -16,12 +17,14 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 import java.util.*;
 
+*/
 /**
 * @ClassName: RedisTokenStore
 * @Description: TODO
 * @author: 55555
 * @date: 2020年07月25日 2:16 下午
-*/
+*//*
+
 public class RedisTokenStore implements TokenStore {
 
     private static final String ACCESS = "access:";
@@ -390,3 +393,4 @@ public class RedisTokenStore implements TokenStore {
     }
 }
 
+*/

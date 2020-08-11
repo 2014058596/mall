@@ -1,3 +1,4 @@
+/*
 package cn.com.mall.user.security;
 
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +9,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 import javax.servlet.http.HttpServletResponse;
 
+*/
 /**
  * 〈资源认证服务器〉
  *  配置资源服务器
  * @since 1.0.0
- */
-@Configuration
-@EnableResourceServer
-@Order(3)
+ *//*
+
+//@Configuration
+//@EnableResourceServer
+//@Order(3)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -33,3 +36,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 }
 
+*/

@@ -1,9 +1,9 @@
 package cn.com.mall.user.api.model;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
+    import com.baomidou.mybatisplus.annotations.TableField;
+    import com.baomidou.mybatisplus.activerecord.Model;
+    import com.baomidou.mybatisplus.annotations.TableName;
+    import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

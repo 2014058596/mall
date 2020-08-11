@@ -1,6 +1,7 @@
 package cn.com.mall.user.api.model;
 
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -16,7 +17,7 @@ import lombok.Data;
  * </p>
  *
  * @author 55555
- * @version Sat Jul 25 16:35:04 CST 2020
+ * @version Sat Jul 25 18:00:08 CST 2020
  * @description
  */
 @Data
@@ -26,7 +27,7 @@ public class PermissionInfoModel extends Model<PermissionInfoModel> {
 
 private static final long serialVersionUID = 1L;
 
-    public static final String ID = "id";
+    public static final String PERMISSION_ID = "permission_id";
 
     public static final String METHOD = "method";
 
@@ -45,7 +46,8 @@ private static final long serialVersionUID = 1L;
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Integer id;
+        @TableId("permission_id")
+    private Integer permissionId;
 
     /**
      * 方法类型
@@ -89,7 +91,7 @@ private static final long serialVersionUID = 1L;
 
     @Override
     protected Serializable pkVal() {
-            return this.id;
+            return this.permissionId;
     }
 
 

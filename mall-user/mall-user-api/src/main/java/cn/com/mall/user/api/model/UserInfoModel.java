@@ -1,12 +1,12 @@
 package cn.com.mall.user.api.model;
 
-    import com.baomidou.mybatisplus.enums.IdType;
-    import java.util.Date;
-    import com.baomidou.mybatisplus.annotations.TableId;
-    import com.baomidou.mybatisplus.annotations.TableField;
-    import com.baomidou.mybatisplus.activerecord.Model;
-    import com.baomidou.mybatisplus.annotations.TableName;
-    import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
+import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,7 +18,7 @@ import lombok.Data;
  * </p>
  *
  * @author 55555
- * @version Sat Jul 25 16:33:52 CST 2020
+ * @version Sat Jul 25 17:59:48 CST 2020
  * @description
  */
 @Data
@@ -28,7 +28,7 @@ public class UserInfoModel extends Model<UserInfoModel> {
 
 private static final long serialVersionUID = 1L;
 
-    public static final String ID = "id";
+    public static final String USER_ID = "user_id";
 
     public static final String USER_NAME = "user_name";
 
@@ -49,8 +49,8 @@ private static final long serialVersionUID = 1L;
      * 会员id
      */
     @ApiModelProperty(value = "会员id")
-        @TableId(value="id", type= IdType.AUTO)
-    private Integer id;
+        @TableId(value="user_id", type= IdType.AUTO)
+    private Integer userId;
 
     /**
      * 会员名
@@ -97,10 +97,10 @@ private static final long serialVersionUID = 1L;
 
 
 
-@Override
-protected Serializable pkVal() {
-            return this.id;
-        }
+    @Override
+    protected Serializable pkVal() {
+            return this.userId;
+    }
 
 
 }

@@ -2,6 +2,8 @@ package cn.com.mall.user.security;
 
 
 
+import cn.com.mall.common.conf.security.MyUserDetail;
+import cn.com.mall.user.api.dto.UserInfoDto;
 import cn.com.mall.user.service.IUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,8 +13,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: MyUserDetailService
@@ -27,34 +32,9 @@ public class MyUserDetailService implements UserDetailsService {
     private IUserInfoService userInfoService;
 
     @Override
-    public UserDetails loadUserByUsername(String memberName) throws UsernameNotFoundException {
-        /*Member member = memberDao.findByMemberName(memberName);
-        if (member == null) {
-            throw new UsernameNotFoundException(memberName);
-        }
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        // 可用性 :true:可用 false:不可用
-        boolean enabled = true;
-        // 过期性 :true:没过期 false:过期
-        boolean accountNonExpired = true;
-        // 有效性 :true:凭证有效 false:凭证无效
-        boolean credentialsNonExpired = true;
-        // 锁定性 :true:未锁定 false:已锁定
-        boolean accountNonLocked = true;
-        for (Role role : member.getRoles()) {
-            //角色必须是ROLE_开头，可以在数据库中设置
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
-            grantedAuthorities.add(grantedAuthority);
-            //获取权限
-            for (Permission permission : role.getPermissions()) {
-                GrantedAuthority authority = new SimpleGrantedAuthority(permission.getUri());
-                grantedAuthorities.add(authority);
-            }
-        }
-        User user = new User(member.getMemberName(), member.getPassword(),
-                enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
-        return user;*/
-        return null;
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        final UserInfoDto userInfoByUserName = userInfoService.findUserInfoByUserName(userName);
+        return new MyUserDetail(userInfoByUserName);
     }
 
 }

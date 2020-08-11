@@ -1,6 +1,7 @@
 package cn.com.mall.user.api.model;
 
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -16,7 +17,7 @@ import lombok.Data;
  * </p>
  *
  * @author 55555
- * @version Sat Jul 25 16:35:23 CST 2020
+ * @version Sat Jul 25 18:00:03 CST 2020
  * @description
  */
 @Data
@@ -26,7 +27,7 @@ public class RoleInfoModel extends Model<RoleInfoModel> {
 
 private static final long serialVersionUID = 1L;
 
-    public static final String ID = "id";
+    public static final String ROLE_ID = "role_id";
 
     public static final String ROLE_NAME = "role_name";
 
@@ -41,7 +42,8 @@ private static final long serialVersionUID = 1L;
      * 角色id
      */
     @ApiModelProperty(value = "角色id")
-    private Integer id;
+        @TableId("role_id")
+    private Integer roleId;
 
     /**
      * 角色名称
@@ -72,7 +74,7 @@ private static final long serialVersionUID = 1L;
 
     @Override
     protected Serializable pkVal() {
-            return this.id;
+            return this.roleId;
     }
 
 

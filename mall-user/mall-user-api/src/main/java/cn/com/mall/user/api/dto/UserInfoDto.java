@@ -16,7 +16,6 @@ import java.util.List;
  */
 @Data
 @ToString
-@Builder
 public class UserInfoDto extends UserInfoModel {
 
     private List<RoleInfoModel> roleList;
