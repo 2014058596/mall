@@ -1,8 +1,7 @@
 package cn.com.mall.user.controller;
-import cn.com.mall.base.bean.CommonException;
-import cn.com.mall.base.bean.PaginationResult;
-import cn.com.mall.base.bean.StandardResult;
-import cn.com.mall.common.utils.SpringContextHelper;
+import cn.com.mall.base.bean.exception.CommonException;
+import cn.com.mall.base.bean.result.PaginationResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import cn.com.mall.user.api.dto.UserInfoDto;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;

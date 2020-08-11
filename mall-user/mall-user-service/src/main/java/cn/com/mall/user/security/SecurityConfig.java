@@ -1,7 +1,7 @@
 package cn.com.mall.user.security;
 
 import cn.com.mall.base.bean.HttpStatus;
-import cn.com.mall.base.bean.StandardResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import cn.com.mall.common.conf.security.JwtAuthenticationTokenFilter;
 import cn.com.mall.user.security.handler.SecurityAuthenticationFailureHandler;
 import cn.com.mall.user.security.handler.SecurityAuthenticationSuccessHandler;
@@ -14,13 +14,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**

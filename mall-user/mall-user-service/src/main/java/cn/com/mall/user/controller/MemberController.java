@@ -2,11 +2,8 @@ package cn.com.mall.user.controller;
 
 
 
-import cn.com.mall.base.bean.StandardResult;
 import cn.com.mall.user.security.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

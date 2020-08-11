@@ -1,10 +1,6 @@
 package cn.com.mall.user.controller;
-import cn.com.mall.base.bean.PaginationResult;
-import cn.com.mall.base.bean.StandardResult;
-import cn.com.mall.user.api.model.PermissionInfoModel;
-import cn.com.mall.user.service.IPermissionInfoService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
+import cn.com.mall.base.bean.result.PaginationResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +12,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+
+
+import cn.com.mall.user.service.IPermissionInfoService;
+import cn.com.mall.user.api.model.PermissionInfoModel;
+import cn.com.mall.user.api.form.PermissionInfoQueryForm;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
 /**
  *　　
  *   PermissionInfo 控制器    
  *
  *   @author 55555
- *   @since 2020-07-25
+ *   @since 2020-08-12
  */
 
 @RestController
 @Api(tags="PermissionInfoController 控制器")
-public class PermissionInfoController  {
+public class PermissionInfoController {
     private final Logger logger = LoggerFactory.getLogger(PermissionInfoController.class);
 
     @Autowired
@@ -42,21 +45,15 @@ public class PermissionInfoController  {
      * 获取分页列表
      *
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value="获取分页列表  55555", notes="获取分页列表  55555", response = PermissionInfoModel.class)
-    @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String"),
-        @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页大小", required = true, dataType = "int", defaultValue = "10"),
-        @ApiImplicitParam(paramType="query", name = "pageNumber", value = "页数", required = true, dataType = "int", defaultValue = "1")
-    })
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @GetMapping("/permissionInfo")
-    public StandardResult selectPage(@ModelAttribute PermissionInfoModel permissionInfoModel, Integer pageSize, Integer pageNumber) {
-        if (pageSize == null || pageNumber == null) {
-            return StandardResult.fail("缺少必要的分页参数！");
-        }
-        Page<PermissionInfoModel> page = new Page<PermissionInfoModel>(pageNumber, pageSize);
-        Wrapper<PermissionInfoModel> wrapper = new EntityWrapper<>(permissionInfoModel);
+    public StandardResult selectPage(@ModelAttribute PermissionInfoQueryForm permissionInfoQueryForm) {
+
+        final Page<PermissionInfoModel> page = permissionInfoQueryForm.getPage();
+        Wrapper<PermissionInfoModel> wrapper = new EntityWrapper<>();
         permissionInfoService.selectPage(page, wrapper);
         return PaginationResult.ok(null, page.getRecords(), page.getTotal(), page.getPages());
     }
@@ -65,12 +62,10 @@ public class PermissionInfoController  {
      * 获取列表
      *
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value="获取列表  55555", notes="获取列表  55555", response = PermissionInfoModel.class)
-    @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String")
-    })
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @GetMapping("/permissionInfoList")
     public StandardResult selectList(@ModelAttribute PermissionInfoModel permissionInfoModel) {
         Wrapper<PermissionInfoModel> wrapper = new EntityWrapper<>(permissionInfoModel);
@@ -80,11 +75,11 @@ public class PermissionInfoController  {
      /**
      * 添加
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value = "添加  55555", notes = "添加PermissionInfo 55555", response = PermissionInfoModel.class)
-    @ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @PostMapping("/permissionInfo")
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     public StandardResult insert(@ModelAttribute PermissionInfoModel permissionInfoModel) {
         permissionInfoService.insert(permissionInfoModel);
         return StandardResult.ok();
@@ -93,10 +88,10 @@ public class PermissionInfoController  {
     /**
      * 修改
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value="修改  55555", notes="更新PermissionInfo 55555", response = PermissionInfoModel.class)
-    @ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String")
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @PutMapping("/permissionInfo")
     public StandardResult updateById(@RequestBody PermissionInfoModel permissionInfoModel) {
         permissionInfoService.updateById(permissionInfoModel);
@@ -107,15 +102,12 @@ public class PermissionInfoController  {
      * 通过id获取详情
      *
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value="通过id获取详情  55555", notes="通过id获取详情  55555", response = PermissionInfoModel.class)
-    @ApiImplicitParams({
-    	@ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String"),
-    	@ApiImplicitParam(paramType="path", name = "id", value = "主键id", dataType = "String", required = true)
-    })
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @GetMapping("/permissionInfo/{id}")
-    public StandardResult selectById(@PathVariable String id) {
+    public StandardResult selectById(@PathVariable @NotEmpty String id) {
         return StandardResult.ok(permissionInfoService.selectById(id));
     }
 
@@ -123,13 +115,10 @@ public class PermissionInfoController  {
      * 通过id删除数据
      *
      * @author : 55555
-     * @since : Create in 2020-07-25
+     * @since : Create in 2020-08-12
      */
     @ApiOperation(value="通过id删除数据  55555", notes="通过id删除数据  55555", response = PermissionInfoModel.class)
-    @ApiImplicitParams({
-    	@ApiImplicitParam(paramType = "query", name = "accessToken", value = "令牌", required = true, dataType = "String"),
-     	@ApiImplicitParam(paramType="path", name = "id", value = "主键id", dataType = "String", required = true)
-    })
+    @ApiImplicitParam(paramType = "header", name = "accessToken", value = "令牌", required = true, dataType = "String")
     @DeleteMapping("/permissionInfo/{id}")
     public StandardResult deleteById(@PathVariable String id) {
         permissionInfoService.deleteById(id);

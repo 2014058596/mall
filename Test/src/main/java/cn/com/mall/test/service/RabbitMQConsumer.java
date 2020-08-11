@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @ClassName: RibbitMQConsumer
+ * @ClassName: RbbitMQConsumer
  * @Description: TODO
  * @author: 55555
  * @date: 2020年08月08日 2:51 下午

@@ -1,7 +1,7 @@
 package cn.com.mall.user.service.impl;
 
 
-import cn.com.mall.base.bean.CommonException;
+import cn.com.mall.base.bean.exception.CommonException;
 import cn.com.mall.user.api.dto.UserInfoDto;
 import cn.com.mall.user.api.model.UserInfoModel;
 import cn.com.mall.user.mapper.UserInfoMapper;
@@ -9,7 +9,6 @@ import cn.com.mall.user.service.IUserInfoService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.bouncycastle.crypto.tls.UserMappingType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package cn.com.mall.base.bean;
+package cn.com.mall.base.bean.exception;
 
 import lombok.Data;
 

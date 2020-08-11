@@ -1,5 +1,7 @@
 package cn.com.mall.test;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -47,5 +49,18 @@ public class TestController {
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
         rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
         return "ok";
+    }
+
+    @GetMapping("/test1")
+    @ApiOperation(value="获取分页列表1  55555", notes="获取分页列表  55555")
+    @HystrixCommand
+    public String test1() throws InterruptedException {
+        Thread.sleep(2000);
+         return "ok";
+    }
+
+
+    private String error(){
+        return "error";
     }
 }

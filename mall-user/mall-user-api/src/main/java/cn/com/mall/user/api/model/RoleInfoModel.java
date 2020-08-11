@@ -42,7 +42,7 @@ private static final long serialVersionUID = 1L;
      * 角色id
      */
     @ApiModelProperty(value = "角色id")
-        @TableId("role_id")
+    @TableId("role_id")
     private Integer roleId;
 
     /**

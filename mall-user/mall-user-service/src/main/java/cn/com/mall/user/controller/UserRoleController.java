@@ -1,6 +1,6 @@
 package cn.com.mall.user.controller;
-import cn.com.mall.base.bean.PaginationResult;
-import cn.com.mall.base.bean.StandardResult;
+import cn.com.mall.base.bean.result.PaginationResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import cn.com.mall.user.api.model.UserRoleModel;
 import cn.com.mall.user.service.IUserRoleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;

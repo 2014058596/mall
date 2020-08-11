@@ -1,16 +1,12 @@
 package cn.com.mall.common.conf.security;
 
-import cn.com.mall.base.bean.HttpStatus;
 import cn.com.mall.base.bean.JwtTokenUtils;
-import cn.com.mall.base.bean.StandardResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -21,9 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @ClassName: JwtAuthenticationTokenFilter

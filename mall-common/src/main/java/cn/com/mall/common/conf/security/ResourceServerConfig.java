@@ -1,7 +1,7 @@
 package cn.com.mall.common.conf.security;
 
 import cn.com.mall.base.bean.HttpStatus;
-import cn.com.mall.base.bean.StandardResult;
+import cn.com.mall.base.bean.result.StandardResult;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

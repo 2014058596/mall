@@ -97,6 +97,7 @@ public class MpGenerator {
                 map.put("constantsClass", MpGenerator.getStringValue("constantsClass"));
                 map.put("applicationName", MpGenerator.getStringValue("applicationName"));
                 map.put("entityModelPackage", MpGenerator.getStringValue("entityModelPackage"));
+                map.put("queryFormPackage", MpGenerator.getStringValue("queryFormPackage"));
                 map.put("entityPackage", MpGenerator.getStringValue("entityPackage"));
                 this.setMap(map);
             }
@@ -118,6 +119,14 @@ public class MpGenerator {
             public String outputFile(TableInfo tableInfo) {
                 return MpGenerator.getStringValue("outputDir") + "/" + (MpGenerator.getStringValue("entityModelPackage").replaceAll("\\.", "/")) +
                         "/" + tableInfo.getEntityName() + "Model.java";
+            }
+        });
+        //添加Entity扩展对象
+        focList.add(new FileOutConfig("templates/queryForm.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return MpGenerator.getStringValue("outputDir") + "/" + (MpGenerator.getStringValue("queryFormPackage").replaceAll("\\.", "/")) +
+                        "/" + tableInfo.getEntityName() + "QueryForm.java";
             }
         });
         //这块是set到上面自定义配置中

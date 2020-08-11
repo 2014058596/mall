@@ -1,6 +1,8 @@
-package cn.com.mall.base.bean;
+package cn.com.mall.base.bean.result;
 
 
+import cn.com.mall.base.bean.HttpStatus;
+import cn.com.mall.base.bean.exception.CommonException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

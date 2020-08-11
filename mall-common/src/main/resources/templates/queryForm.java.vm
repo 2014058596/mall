@@ -1,0 +1,20 @@
+package ${package.Entity};
+
+import cn.com.mall.base.bean.form.BaseQueryForm;
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
+import ${cfg.queryFormPackage}.${entity}Model;
+
+
+/** 
+* @ClassName: Model
+* @Description:
+* @author: 55555
+* @date: 2020年08月12日 12:30 上午
+*/
+@Data
+@ApiModel
+public class ${entity}QueryForm extends BaseQueryForm<${entity}Model> {
+
+
+}

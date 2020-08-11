@@ -1,6 +1,8 @@
-package cn.com.mall.base.bean;
+package cn.com.mall.base.bean.exception;
 
-/** 
+import cn.com.mall.base.bean.HttpStatus;
+
+/**
 * @ClassName: CommonException
 * @Description: TODO
 * @author: 55555
